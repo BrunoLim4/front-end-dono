@@ -1,7 +1,7 @@
 // frontend-dono/src/components/Dashboard.jsx
 
 import React, { useEffect, useState, useMemo } from 'react';
-import Slider from 'react-slick'; // Mantenha Slider para o carrossel principal de categorias
+import Slider from 'react-slick';
 import { useNavigate } from 'react-router-dom';
 import {
   FaSearch,
@@ -22,8 +22,9 @@ import { useAuth } from '../context/authContext';
 import racingLogo from '/img/racing_logo.png';
 
 
-// Define as URLs base da API usando variáveis de ambiente do Vite
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dashboardracing-azure.vercel.app/api/donos';
+// CORREÇÃO: Unificação da URL base da API
+// Esta variável agora usa VITE_BACKEND_URL (da Vercel) ou o localhost do seu backend (ex: 3001)
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
 
 // Setas customizadas para o carrossel principal (horizontal)
 function MainNextArrow({ onClick }) {
@@ -72,7 +73,8 @@ const Dashboard = () => {
         return;
       }
 
-      const response = await fetch(`${API_BASE_URL}/categorias`, {
+      // CORREÇÃO: URL completa para a rota de categorias do dono no backend
+      const response = await fetch(`${API_BASE_URL}/api/donos/categorias`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -173,7 +175,8 @@ const Dashboard = () => {
         return;
       }
 
-      const response = await fetch(`${API_BASE_URL}/alunos/${studentId}`, {
+      // CORREÇÃO: URL completa para a rota de atualização de alunos do dono
+      const response = await fetch(`${API_BASE_URL}/api/donos/alunos/${studentId}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -213,7 +216,8 @@ const Dashboard = () => {
         return;
       }
 
-      const response = await fetch(`${API_BASE_URL}/alunos/${studentId}`, {
+      // CORREÇÃO: URL completa para a rota de exclusão de alunos do dono
+      const response = await fetch(`${API_BASE_URL}/api/donos/alunos/${studentId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
