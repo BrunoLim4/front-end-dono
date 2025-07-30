@@ -23,7 +23,7 @@ import racingLogo from '/img/racing_logo.png';
 
 
 // Define as URLs base da API usando variáveis de ambiente do Vite
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/donos';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dashboardracing-azure.vercel.app/api/donos';
 
 // Setas customizadas para o carrossel principal (horizontal)
 function MainNextArrow({ onClick }) {
