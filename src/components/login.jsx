@@ -1,23 +1,26 @@
+// login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
 import racingLogo from '/img/racing_rodape.png';
-import { useAuth } from '../context/authContext'; // Importe o hook useAuth
+import { useAuth } from '../context/authContext';
 
-const API_LOGIN_URL = import.meta.env.VITE_API_LOGIN_URL || 'http://localhost:3001/api'; // Ajustado para 3001
+// Use a URL base do backend. O '/api' será adicionado na chamada fetch.
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001'; // Ajuste a porta local para 3001 se essa for a do seu backend local
 
 export default function Login() {
   const [accessCode, setAccessCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth(); // Obtenha a função login do contexto
+  const { login } = useAuth();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     setError('');
 
     try {
-      const response = await fetch(`${API_LOGIN_URL}/login`, {
+      // A URL completa será: https://racing-dashboard-backend.onrender.com/api/login
+      const response = await fetch(`${API_BASE_URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,8 +37,8 @@ export default function Login() {
       console.log('Login bem-sucedido!', data);
 
       if (data.token) {
-        login(data.token); // Use a função login do contexto para definir o token
-        navigate('/dashboard'); // Redireciona
+        login(data.token);
+        navigate('/dashboard');
       } else {
         throw new Error('Token de autenticação não recebido.');
       }
