@@ -4,7 +4,7 @@ import './login.css';
 import racingLogo from '/img/racing_rodape.png';
 import { useAuth } from '../context/authContext'; // Importe o hook useAuth
 
-const API_LOGIN_URL = import.meta.env.VITE_API_LOGIN_URL || 'http://localhost:3000/api'; // Ajustado para 3000
+const API_LOGIN_URL = import.meta.env.VITE_API_LOGIN_URL || 'http://localhost:3001/api'; // Ajustado para 3001
 
 export default function Login() {
   const [accessCode, setAccessCode] = useState('');
