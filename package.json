@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "vite preview --port $PORT",
-    "postinstall": "chmod +x node_modules/.bin/vite"
+    "prepare": "chmod +x ./node_modules/.bin/vite || true"
   },
   "dependencies": {
     "vite": "^7.0.4",
