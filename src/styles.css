@@ -1,0 +1,606 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Reset Básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Exo 2', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+}
+
+/* Base do Contêiner */
+.container {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Cabeçalho */
+.header {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px 20px 0 20px;
+  z-index: 1;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Barra de Pesquisa */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 25px;
+  padding: 8px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
+  max-width: 500px;
+  min-width: 200px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.search-bar svg {
+  color: #888;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.logout-button:hover {
+  background-color: #c82347;
+  transform: translateY(-1px);
+}
+
+/* --- Filtros e Dropdowns --- */
+.filters {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-bottom: 30px;
+  z-index: 1;
+  padding: 0 20px;
+  flex-wrap: wrap;
+  z-index: 999;
+}
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.filter-button {
+  background-color: #3C34D5;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.filter-button:hover {
+  background-color: #5d4aaf;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-button svg {
+  font-size: 18px;
+}
+
+/* Estilos para o menu dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 150px;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Estilos para cada item do dropdown */
+.dropdown-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  color: #333;
+  font-size: 15px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #e6f0ff;
+  color: #3C34D5;
+}
+
+.dropdown-item:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+/* Conteúdo Principal (Carrossel de Categorias) */
+.main-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 50px auto;
+  position: relative;
+  padding: 0 20px;
+  z-index: 1;
+}
+
+/* Estilos para as setas do carrossel principal */
+.main-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.main-carousel-arrow:hover {
+  background-color: #ececff;
+}
+
+/* Posicionamento das setas agora relativo ao .main-content */
+.slick-prev.main-carousel-arrow {
+  left: 0px;
+}
+
+.slick-next.main-carousel-arrow {
+  right: 0px;
+}
+
+/* Esconde as setas padrão do slick e mostra apenas as nossas */
+.slick-prev:before, .slick-next:before {
+  display: none;
+}
+
+/* Estilo para cada slide de categoria */
+.carousel-category-slide {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.slick-center .carousel-category-slide {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.slick-slide:not(.slick-center) .carousel-category-slide {
+  opacity: 0.75;
+  transform: scale(0.9);
+}
+
+/* Pontos de navegação */
+.slick-dots {
+  bottom: -40px;
+  list-style: none;
+  display: flex !important;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.slick-dots li {
+  margin: 0 6px;
+}
+
+.slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  width: 12px;
+  height: 12px;
+  padding: 5px;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  background: #bbb;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.slick-dots li.slick-active button {
+  background: #3C34D5;
+}
+
+/* Efeito de fade nas bordas do carrossel (se necessário) */
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%; /* Garante que o wrapper ocupe a largura total disponível */
+  max-width: 1200px; /* Limita a largura máxima do carrossel */
+}
+
+.carousel-wrapper::before,
+.carousel-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  /* Ajustado para porcentagem para maior flexibilidade */
+  width: 5%; /* Largura relativa para o fade */
+  max-width: 80px; /* Mantém um limite máximo */
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.carousel-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff 0%, transparent 100%);
+}
+
+.carousel-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff 0%, transparent 100%);
+}
+
+.student-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 10px; /* Provides space between student cards */
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Estilo para o item do aluno (a parte clicável) */
+.student-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.student-item:hover {
+  background-color: #e6e6e6;
+}
+
+.student-photo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.student-item span {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Estilos para a seção de edição expandida */
+.edit-section {
+  padding: 10px 15px 15px 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contêiner para os campos de edição que terá o scroll */
+.edit-fields-scroll-container {
+  flex-grow: 1;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.edit-section label {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.edit-section input,
+.edit-section select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.95em;
+  box-sizing: border-box;
+}
+
+.edit-section-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.edit-section-buttons button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  flex-grow: 1;
+  min-width: 100px;
+}
+
+.save-button {
+  background-color: #3C34D5;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #5d4aaf;
+  transform: translateY(-1px);
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+.delete-button svg {
+  margin-right: 5px;
+}
+
+/* Estilos para o label do input de arquivo na edição */
+.edit-section .file-upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #f0f0f0;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 0.95em;
+  color: #555;
+  transition: background-color 0.2s ease;
+  margin-top: 5px;
+}
+
+.edit-section .file-upload-label:hover {
+  background-color: #e6e6e6;
+}
+
+.edit-section .file-upload-label svg {
+  font-size: 1.2em;
+}
+
+/* Estilos para o contêiner e imagem de pré-visualização da foto na edição */
+.edit-section .foto-preview-container {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.edit-section .foto-preview {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3C34D5;
+}
+
+/* Coluna de Categoria */
+.category-column {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Keep overflow hidden for the column itself */
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 15px;
+  height: 100%;
+}
+
+.category-header {
+  background-color: #3C34D5;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+}
+
+/* Lista de Alunos (MODIFIED FOR SCROLL) */
+.student-list {
+  padding: 15px;
+  flex-grow: 1; /* Allows it to take available space in the column */
+  width: 100%;
+  /* Removed fixed height, added max-height and overflow-y */
+  max-height: 500px; /* Adjusted to a higher value to show more students */
+  overflow-y: auto; /* Activates vertical scrollbar when content exceeds max-height */
+  padding-right: 10px; /* Adds space for the scrollbar so content doesn't touch it */
+  margin: 0;
+  position: relative;
+}
+
+/* Scrollbar styling for Webkit browsers (Chrome, Safari, Edge) */
+.student-list::-webkit-scrollbar {
+  width: 8px; /* Width of the vertical scrollbar */
+}
+
+.student-list::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+  border-radius: 10px;
+}
+
+.student-list::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+  border-radius: 10px;
+}
+
+.student-list::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb on hover */
+}
+
+
+/* Item de Aluno (dentro do wrapper) - Replicated, ensure this is the only definition for .student-item */
+/* Removed the duplicated .student-item styling block to avoid conflicts.
+   The one above for .student-item-wrapper already defined this.
+   If there are specific styles only for .student-item itself,
+   ensure they are distinct or merged. The original provided CSS had a duplicate block.
+*/
+.student-item svg {
+  color: #4CAF50; /* Green checkmark for paid */
+  margin-left: 10px;
+}
+/* If FaTimes needs explicit styling for 'Pendente' */
+.student-item .fa-times {
+    color: red !important; /* Force red for pending */
+}
+
+
+/* Botão "Ver Todos" */
+.view-all-button {
+  background-color: #3C34D5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  margin: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: calc(100% - 30px);
+  max-width: 200px;
+}
+
+.view-all-button:hover {
+  background-color: #5d4aaf;
+  transform: translateY(-2px);
+}
+
+/* Rodapé */
+.footer {
+  width: 100%;
+  background-color: #3C34D5;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding-bottom: 20px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.footer .footer-logo {
+  width: 90px;
+  height: auto;
+  z-index: 999;
+}
+
+/* Setas verticais do carrossel de alunos - These are for react-slick,
+   which we've removed from the student list. If you still see them,
+   double-check your JS or remove this block. */
+.student-carousel-arrow {
+  /* This block should no longer be relevant if you removed react-slick for student lists */
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  z-index: 1;
+}
+
+.student-carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
